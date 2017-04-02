@@ -13,3 +13,44 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "font-awesome";
+ @import "bootstrap";
+ @import "bootstrap-sprockets";
+ $background-color: #f7f8f9;
+
+ body{
+	background-color: $background-color;
+ }
+
+ .row{ 
+  margin: 0; padding: 0;
+}
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
