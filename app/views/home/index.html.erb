@@ -22,12 +22,20 @@
 	</div>
 	<div class="col-md-3" style="margin-left: 250px;">
 		<div class="row">
-			
+			<%= render "devise/registrations/new", 
+                    :locals => { 
+                      :resource => current_user, 
+                      :resource_name => :user } %>
 		</div><br>
 		<div class="row">
-			
+			<%= render "devise/sessions/new", 
+                    :locals => { 
+                      :resource => current_user, 
+                      :resource_name => :user } %> 
 		</div>
 
 		
+		<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+		<%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path %>
 	</div>
 </div>
