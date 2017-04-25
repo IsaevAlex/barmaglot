@@ -1,0 +1,24 @@
+<div class="panel panel-white post ">
+	<div class="post-heading">
+         <div class="pull-left image">
+         	<%= link_to image_tag("avatar.png", class:"img-rounded avatar"), user %>
+         </div>
+         <div class="pull-left meta">
+         	<b><%= link_to user.name, user %></b>
+            <h6 class="text-muted time"><%= user.email %></h6>
+         </div>
+         <div class="follow_form-<%= user.id %>">
+            <% if current_user.following?(user) %>
+                <%= form_for(current_user.relationships.find_by(followed_id: user), remote: true, html: { method: :delete }) do |f| %>
+                    <%= f.submit "Отписаться", class: "btn btn-large pull-right" %>
+                <% end %>
+            <% else %>
+                <%= form_for(current_user.relationships.build(followed_id: user.id),     remote: true)  do |f| %>
+                    <div><%= f.hidden_field :followed_id %></div>
+                    <%= f.submit "Подписаться", class: "btn btn-#{user.id} pull-right" %>
+                <% end %>
+            <% end %>
+        </div>
+    </div> 
+
+</div>

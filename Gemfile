@@ -9,12 +9,12 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 
+gem 'paperclip'
+gem "cancan"
 gem 'bootstrap-sass'
-
 gem "font-awesome-rails"
-
 gem 'devise'
-
+gem "nested_form"
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'

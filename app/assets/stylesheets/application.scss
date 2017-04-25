@@ -18,6 +18,7 @@
  @import "bootstrap";
  @import "bootstrap-sprockets";
  $background-color: #f7f8f9;
+ $main-color: #007ab2;
 
  body{
 	background-color: $background-color;
@@ -57,9 +58,7 @@
 }
  /* ticket styles */
 
- .panel-shadow {
-   box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
-}
+
 
 .panel-white  .panel-heading {
   color: #333;
@@ -74,6 +73,16 @@
   display: block;
   float: right;
 }
+
+.post .recomended_post-heading{
+   height: 95px;
+}
+
+.post .recomended_post-heading .avatar{
+   width: 60px;
+   height: 60px;
+}
+
 .post .post-heading {
   height: 95px;
   padding: 20px 15px;
@@ -105,12 +114,14 @@
 
 .post .post-description {
   padding: 15px;
+  margin-right: 15px;
   
 }
-.post .post-description p {
-  font-size: 14px;
 
+.post .post-description p {
+  font-size: 18px;
 }
+
 .post .post-description .stats {
   margin-top: 20px;
 }
@@ -138,3 +149,17 @@
 .sign-up-back .btn{
 	text-align: center;
 }
+
+.btn{
+	background-color: transparent;
+	border: 2px $main-color solid;
+	color: $main-color;
+	border-radius: 40px;
+	padding: 5px 25px;
+}
+
+.btn:hover{
+	background-color: $main-color;
+	color: #fff;
+}
+

@@ -1,0 +1,22 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form{
+	padding: 30px;
+}
+
+.inline{
+	display: flex;
+	align-items: flex-end;
+	padding: 15px;
+}
+
+.vote{
+	padding-right: 20px;
+}
+
+.fa-comment-o{
+	margin-bottom: 3px;
+	padding-right: 5px;
+}

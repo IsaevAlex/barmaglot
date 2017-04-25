@@ -1,0 +1,33 @@
+<div class="panel panel-white post panel-shadow">
+    <div class="post-heading">
+            <div class="pull-left image">            
+                <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), post.user  %>
+            </div>
+            <div class="pull-left meta">
+                <a href="#"><b><%= post.user.name %></b></a>
+                <p><%= post.created_at %></p>
+            </div>
+            <div class="pull-right meta">
+                <%= link_to "Подробнее", post, remote: true,  data: { toggle: "modal", target: "#showPostModal" }, class:"btn"  %>
+            </div>
+    </div> 
+    <div class="post-description"> 
+        <div class="post-description-info">
+            <h3>
+                <%= post.name%>
+            </h3>
+        </div>
+        <% post.post_images.take(1).each do | image | %>
+            <%= image_tag image.avatar.url, :size => "530x350" %>
+        <% end %><br><br>
+         <div class="inline">
+            <%= link_to like_post_path(post, type: "like"), method: :put, remote: true do %>
+                <div class="votes-<%= post.id %> vote">
+                    <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i> <%= post.post_voices.count %>
+                </div>
+            <% end %>
+            <i class="fa fa-comment-o fa-2x" aria-hidden="true"></i> <%= post.post_comments.count %>
+        </div>
+    </div>
+</div>
+    

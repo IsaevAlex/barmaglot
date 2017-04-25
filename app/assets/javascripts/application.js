@@ -13,5 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require jquery_nested_form
 //= require turbolinks
 //= require_tree .
+
+
+$(function () {
+    $("#posts_search input").keyup(function() {
+    $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
+    return false;
+  });
+});

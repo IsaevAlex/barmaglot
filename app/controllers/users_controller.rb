@@ -1,16 +1,34 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :following, :followers, :feed]
 
   # GET /users/:id.:format
   def show
-    # authorize! :read, @user
+    @posts = @user.posts.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
+    @users = User.all
+    @recomended_followers = @users.sample(5)
+    @feed_items = current_user.feed.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
+    @follwedusers = @user.followed_users
   end
+
 
   # GET /users/:id/edit
   def edit
     # authorize! :update, @user
   end
 
+  def following
+    @title = "Подписки"
+    @count = @user.followed_users.count
+    @users = @user.followed_users.order("created_at DESC")
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Подписчики"
+    @count = @user.followers.count
+    @users = @user.followers.order("created_at DESC")
+    render 'show_follow'
+  end
   # PATCH/PUT /users/:id.:format
   def update
     # authorize! :update, @user
@@ -27,18 +45,7 @@ class UsersController < ApplicationController
   end
 
   # GET/PATCH /users/:id/finish_signup
-  def finish_signup
-    # authorize! :update, @user 
-    if request.patch? && params[:user] #&& params[:user][:email]
-      if @user.update(user_params)
-        # @user.skip_reconfirmation!
-        sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
-      else
-        @show_errors = true
-      end
-    end
-  end
+  
 
   def current_user_home
   	 redirect_to current_user
@@ -61,6 +68,6 @@ class UsersController < ApplicationController
     def user_params
       accessible = [ :name, :email ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-      params.require(:user).permit(accessible)
+      params.require(:user).permit(accessible).except(:search)
     end
 end

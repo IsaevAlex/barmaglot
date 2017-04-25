@@ -1,0 +1,20 @@
+<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">
+         <div class="pull-left image">
+         	<%= link_to image_tag("avatar.png", class:"img-rounded avatar"), post_comment.user %>
+         </div>
+         <div class="pull-left meta">
+         	<b><%= link_to post_comment.user.name %></b>
+                            добавила отзыв
+            <h6 class="text-muted time"><%= post_comment.created_at %></h6>
+         </div>
+         <% if can? :destroy, post_comment %>
+             <%= link_to [post_comment.post, post_comment], method: :delete, :remote => true,  data: { confirm: "Вы уверены?" } do %>
+                <i class="fa fa-trash-o fa-2x pull-right" aria-hidden="true"></i>
+             <% end %>
+         <% end %>
+    </div> 
+    <div class="post-description comment">
+    		<h4><%= post_comment.comment %></h4>
+    </div>
+</div>

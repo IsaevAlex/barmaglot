@@ -1,0 +1,10 @@
+<div class="user-info">
+	<div class="user-info-avatar">
+		<%= image_tag("avatar.png", :class => "img-rounded", width:"130px") %>
+		<h4><%= @user.name %></h4>
+		<h3><%= @user.email %></h3>
+		<h4>Казань</h4><br>
+		<%= render 'follow_form' %><br>
+	</div>
+	<%= render 'stats' %>
+</div>

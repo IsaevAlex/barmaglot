@@ -1,0 +1,31 @@
+<div class="panel post" style="padding: 20px; ">
+	<h4>На кого подписаться</h4><br>
+	<% @recomended_followers.each do |user| %>
+		<% unless current_user.following?(user) %>
+			<% unless current_user == user %>
+				<div class="panel panel-white post">
+					<div class="recomended_post-heading">
+						<div class="pull-left image">
+         					<%= link_to image_tag("avatar.png", class:"img-rounded avatar"), user %>
+         				</div>
+         				<div class="pull-right meta">
+         					<b><%= link_to user.name, user %></b><br><br>
+            				<div class="follow_form-<%= user.id %>">
+								  <% if current_user.following?(user) %>
+								       <%= form_for(current_user.relationships.find_by(followed_id: user), remote: true, html: { method: :delete }) do |f| %>
+										  <%= f.submit "Отписаться", class: "btn" %>
+									   <% end %>
+								  <% else %>
+									   <%= form_for(current_user.relationships.build(followed_id: user.id), 	remote: true)  do |f| %>
+	  										<div><%= f.hidden_field :followed_id %></div>
+	  										<%= f.submit "Подписаться", class: "btn btn-#{user.id}" %>
+										<% end %>
+								  <% end %>
+							 </div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>	
+</div>

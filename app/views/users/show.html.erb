@@ -1,3 +1,63 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/messages' %>  
-<h1><%= @user.email %></h1>
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+          <%= render "tabs" %>        
+      </div>
+   </div>
+   <div class="tab-content">
+        <div id="posts_list" class="tab-pane fade in active">
+            <div class="user-profile">
+              <div class="row">
+                <div class="col-md-3">
+                  <%= render "user_info" %>
+                </div>  
+                <div class="col-md-6">
+                      <%= form_tag user_path, :method => 'get', :id => "posts_search" do %>
+                        <p>
+                            <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Поиск новостей" %>
+                        </p>
+                      <% end %><br>
+                      <ul class="nav nav-tabs" >
+                          <li class="active"><a data-toggle="tab" href="#followers-posts"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Новости друзей</a></li>
+                          <li><a data-toggle="tab" href="#my-posts"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Мои новости</a></li>
+
+                      </ul>
+                      <div class="tab-content">
+                          <div id="followers-posts" class="tab-pane fade in active">
+                              <% if @feed_items.any? %>
+                                
+                                  <%= render partial: 'feed_item', collection: @feed_items %>
+                                
+                              <% end %>
+                          </div>
+                          <div id="my-posts" class="tab-pane fade">
+                              <div id="post">
+                                <%= render @posts %>
+                              </div>
+                          </div>
+                          
+                      </div>
+                      
+                </div>  
+                <div class="col-md-3">
+                    <% if current_user.id == @user.id %>
+                        <%= render "recomended_followers" %>
+                    <% end %>
+                </div>  
+            </div>
+        </div>
+     </div>
+  </div>  
+</div>
+
+
+<div class="modal fade" id="showPostModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+

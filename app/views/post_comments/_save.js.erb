@@ -1,0 +1,11 @@
+$("ul.errors").html("")
+<% if @comment.errors.any? %>
+  <% @comment.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("ul.errors").append($("<li />").html("Вы оставили отзыв"))
+  $(".comments-<%= @post.id %>").html("<i class='fa fa-comment-o fa-2x' aria-hidden='true'></i> <%= @post.post_comments.count %>");
+  $("#com").html("<%=j render @post.post_comments.order(created_at: :desc) %>");
+  $("#flash").html('<%= escape_javascript(render :partial => "layouts/messages", :locals => {:comment => @comment}) %>');
+<% end %>

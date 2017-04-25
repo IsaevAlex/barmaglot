@@ -18,7 +18,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-            <li><a href="#">Another action</a></li>
+            <li><%= link_to "Edit profile", edit_user_registration_path %></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
@@ -33,9 +33,36 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu">
+            <li> 
+                <%= link_to "Добавить новость", new_post_path, remote: true,  data: { toggle: "modal", target: "#newPostModal" } %>
+            </li>
+            <li>
+                <%= link_to "Добавить товар", '#' %>
+            </li>
+            <li>
+                <%= link_to "Добавить услугу", '#' %>
+            </li>
+          </ul>
+        </li>
         <li><a href=""><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a></li>
-        <li><a href=""><i class="fa fa-user-o fa-2x" aria-hidden="true"></i></a></li>
+        
+        <li>
+          <%= link_to current_user do %>
+            <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+           <% end %>
+        </li>
+        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="modal fade" id="newPostModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

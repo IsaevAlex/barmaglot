@@ -1,0 +1,89 @@
+<div class="panel panel-white post panel-shadow">
+  			    <div class="post-heading">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <div class="pull-left image">
+                     <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), @post.user  %>
+                 </div>
+                 <div class="pull-left meta">
+                        <a href="#"><b> <%= @post.user.name %></b></a>
+
+                        <h6 class="text-muted time">Новость добавлена <%= @post.created_at %></h6>
+                  </div><br>
+                  <div class="pull-right meta">
+                   		<%= link_to "Подписаться", '#', class:"btn" %>
+
+                  </div><br>
+                  <div class="post-description" style="text-align: center;"> 
+                      <h2><%= @post.name  %></h2>
+                      
+                  </div><br>
+                 
+            </div> <br><br>
+            
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <% @post.post_images.each_with_index do |post_image, index| %>
+                        <% if index == 0 %>
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <% else %>
+                            <li data-target="#myCarousel" data-slide-to="<%= index %>"></li>
+                        <% end %>
+                    <% end %>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                        <% @post.post_images.each_with_index do |post_image, index| %>
+                            <% if index == 0 %>
+                                <div class="item active">
+                                    <p><%= image_tag post_image.avatar.url, width:"600", height:"400" %></p>
+                                </div>
+                            <% else %>
+                                 <div class="item">
+                                     <p><%= image_tag post_image.avatar.url,  width:"600", height:"400" %></p>
+                                 </div>
+                            <% end %>
+                        
+                        <% end %>                    
+                  </div>
+				          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
+                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
+              </div>
+              
+
+            <div class="post-description">
+                <p>
+                	<%= @post.description %>
+                </p> 
+            </div>
+            <div class="inline">
+            	<%= link_to like_post_path(@post, type: "like"), method: :put, remote: true do %>
+					<div class="votes-<%= @post.id %> vote">
+				    	<i class="fa fa-heart-o fa-2x" aria-hidden="true"></i> <%= @post.post_voices.count %>
+				    </div>
+				<% end %>
+					<div class="comments-<%= @post.id %>">
+						<i class="fa fa-comment-o fa-2x" aria-hidden="true"></i> <%= @post.post_comments.count %>
+					</div>
+            </div>
+            <div class="comment-form">
+            	<% if user_signed_in?  %>
+	            	<h2>Добавить отзыв</h2>
+	                <div id="comment">
+	                	<%= render :partial => 'post_comments/form', :locals => {:comment => @comment} %>
+	                </div> <br>
+            	<% else %>
+                	<p>Чтобы добавить отзыв,вы должны зарегистрироваться</p>    
+            	<% end %><br>
+            	
+            	
+            </div>
+            <div id="com">
+                <%= render @post.post_comments.order("created_at DESC") %>
+            </div>	
+
+            
+</div>
+
+

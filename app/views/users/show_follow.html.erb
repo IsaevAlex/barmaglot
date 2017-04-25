@@ -1,0 +1,16 @@
+<%= render 'layouts/header' %>
+<div class="container">
+  <div class="row">
+      <div class="col-md-8">
+          <div class="panel panel-white post">
+            <div class="follow-title">
+              <h5><%= @title %></h5>
+              <h5 ><%= @count %></h5>  
+            </div>
+            
+          </div> 
+          <%= render @users %>
+      </div>
+  </div>
+</div>
+

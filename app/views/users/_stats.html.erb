@@ -1,0 +1,14 @@
+<div class="user-info-foll">
+	<div class="user-info-foll-following">
+		<div id="following">
+			<h4><%= @user.followed_users.count %></h4>
+		</div>
+		<p><%= link_to "Подписки", following_user_path(@user) %></p>
+	</div>
+	<div class="user-info-foll-followers">
+		<div id="followers">
+			<h4><%= @user.followers.count %></h4>	
+		</div>
+		<p><%= link_to "Подписчики", followers_user_path(@user) %></p>
+	</div>
+</div>

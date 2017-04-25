@@ -1,3 +1,61 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-profile{
+	margin-top: 50px;
+
+	.col-md-6{
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.box{
+	margin-right: 200px;
+}
+
+
+.edit{
+  padding: 20px;
+}
+
+.profile-tabs .nav-tabs{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;				
+}
+
+.profile-tabs .nav-tabs > li > a{
+	font-size: 15px;
+}
+
+.profile-tabs .nav-tabs > li.active > a, .profile-tabs .nav-tabs > li.active > a:focus, .profile-tabs .nav-tabs > li.active > a:hover{
+	border-bottom: 2px solid blue;
+	background-color: #f7f8f9;
+}
+
+.user-info{
+	background: #fff;
+		
+}
+
+.user-info-avatar{
+	text-align: center;
+}
+
+.user-info-foll{
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+}
+
+.user-info-foll-following,.user-info-foll-followers{
+	border-top: 3px solid #f7f8f9;
+	border-bottom: 3px solid #f7f8f9;
+	padding: 10px 30px;
+}
+
+.user-info-foll-following{
+	border-right: 3px solid #f7f8f9;
+}
