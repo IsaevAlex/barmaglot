@@ -24,6 +24,7 @@
 	background-color: $background-color;
  }
 
+
  .row{ 
   margin: 0; padding: 0;
 }
@@ -87,12 +88,10 @@
   height: 95px;
   padding: 20px 15px;
 }
-.post .post-heading .avatar {
-  width: 60px;
-  height: 60px;
-  display: block;
-  margin-right: 15px;
-}
+.post .panel-heading .avatar {
+  width: 50px;
+  height: 50px;
+ }
 .post .post-heading .meta .title {
   margin-bottom: 0;
 }
@@ -161,5 +160,13 @@
 .btn:hover{
 	background-color: $main-color;
 	color: #fff;
+}
+
+.navbar{
+  margin-bottom: 0px; 
+}
+
+.panel-body{
+  color: #333;
 }
 

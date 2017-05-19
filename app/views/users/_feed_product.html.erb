@@ -1,0 +1,40 @@
+
+<div class="panel panel-white post panel-shadow">
+    <%= link_to feed_product.item, remote: true,  data: { toggle: "modal", target: "#showProductModal" } do %>
+                    <% feed_product.item.images.take(1).each do | image | %>
+                        <%= image_tag image.avatar.url, class:"img-responsive" %>
+                    <% end %>
+                
+               <div class="panel-heading">
+                    <div class="pull-left">
+                        <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), feed_product.user  %>
+                    </div>
+                    <a href="#"><b><%= feed_product.user.email %></b></a>
+                    <p><%= feed_product.item.created_at %></p>
+                    
+                    
+               </div>
+               <%= link_to feed_product.item, remote: true,  data: { toggle: "modal", target: "#showProductModal" } do %>
+                    <div class="panel-body">
+                        <h4><%= feed_product.item.name %></h4>
+                        <p><%= feed_product.item.description %></p>
+                    </div>
+                <% end %>
+
+            
+    <% end %>
+    <div class="inline">
+        <%= link_to upvote_man_dress_path(feed_product.item, type: "upvote"), method: :put, remote: true do %>
+            <div class="votes-<%= feed_product.item.id %> vote">
+                <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i> <%= feed_product.item.likes.count %>
+            </div>
+        <% end %>
+                    <i class="fa fa-comment-o fa-2x" aria-hidden="true"></i> <%= feed_product.item.comments.count %>
+                </div>
+</div>
+<div class="modal fade" id="showProductModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

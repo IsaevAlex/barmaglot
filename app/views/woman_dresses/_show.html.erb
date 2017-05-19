@@ -1,0 +1,126 @@
+<div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <div class="pull-left image">
+                     <%= link_to image_tag("avatar.png", class:"img-rounded avatar", :size => '60x60'), @woman_dress.product.user  %>
+                 </div>
+                 <div class="pull-left meta">
+                        <a href="#"><b> <%= @woman_dress.product.user.name %></b></a>
+
+                        <h6 class="text-muted time">Новость добавлена <%= @woman_dress.created_at %></h6>
+                  </div><br>
+                  <div class="pull-right meta">
+                        <%= link_to "Подписаться", '#', class:"btn" %>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown btn">
+                          <i class="fa fa-caret-down" aria-hidden="true"></i>
+                           <ul class="dropdown-menu">
+                              <li> 
+                                  <%= link_to "Добавить новость", new_post_path, remote: true,  data: { toggle: "modal", target: "#newPostModal" } %>
+                              </li>
+                              <li>
+                                  <%= link_to "Добавить товар", add_product_path %>
+                              </li>
+                              <li>
+                                  <%= link_to "Добавить услугу", '#' %>
+                              </li>
+                            </ul>
+                        </li>
+                      </a>
+                  </div><br>
+                  <div class="post-description" style="text-align: center;"> 
+                      <h2><%= @woman_dress.name  %></h2>
+                      
+                  </div><br>
+                 
+            </div> <br><br>
+            
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <% @woman_dress.images.each_with_index do |post_image, index| %>
+                        <% if index == 0 %>
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <% else %>
+                            <li data-target="#myCarousel" data-slide-to="<%= index %>"></li>
+                        <% end %>
+                    <% end %>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                        <% @woman_dress.images.each_with_index do |image, index| %>
+                            <% if index == 0 %>
+                                <div class="item active">
+                                    <p><%= image_tag image.avatar.url, width:"600", height:"400" %></p>
+                                </div>
+                            <% else %>
+                                 <div class="item">
+                                     <p><%= image_tag image.avatar.url,  width:"600", height:"400" %></p>
+                                 </div>
+                            <% end %>
+                        
+                        <% end %>                    
+                  </div>
+                          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
+                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
+              </div>
+              
+
+            <div class="post-description">
+                <p>Категория</p> <h3><%= cap(@woman_dress.product.item_type) %> <%= @woman_dress.woman_category.name unless @woman_dress.woman_category.nil?  %></h3>
+
+                <p>Описание</p> 
+                <% if @woman_dress.description.nil? %>
+                  <h3>Не добавлено</h3>
+                <% else %>
+                  <h3><%= @woman_dress.description %></h3>
+                <% end %>
+
+                <p>Размеры</p> 
+                  <% @woman_dress.clother_sizes.each do |clother| %>
+                    <h3><%= clother.name %></h3>
+                  <% end %>
+                <p>В продаже</p> 
+                <% if @woman_dress.on_sale? %>
+                  <h3>Есть</h3>
+                <% else %>
+                  <h3>Отсутствует</h3>
+                <% end %>
+                <p>Гарантия</p> 
+                <% if @woman_dress.garant? %>
+                  <h3>Есть</h3>
+                <% else %>
+                  <h3>Отсутствует</h3>
+                <% end %>
+            </div>
+            <div class="inline">
+                 <%= link_to upvote_man_dress_path(@woman_dress, type: "upvote"), method: :put, remote: true do %>
+                   <div class="votes-<%= @woman_dress.id %> vote">
+                       <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i> <%= @woman_dress.likes.count %>
+                   </div>
+                <% end %>
+                <div class="comments-<%= @woman_dress.id %>">
+                    <i class="fa fa-comment-o fa-2x" aria-hidden="true"></i> <%= @woman_dress.comments.count %>
+                </div>
+            </div>
+            <div class="comment-form">
+              <% if user_signed_in?  %>
+                <h2>Оставить отзыв</h2>
+                  <div id="comment">
+                    <%= render :partial => 'comments/form', :locals => {:comment => @comment} %>
+                  </div> <br>
+              <% else %>
+                  <p>Чтобы добавить отзыв,вы должны зарегистрироваться</p>    
+              <% end %><br>
+              
+              
+            </div>
+            <div id="com">
+                <%= render @commentable.comments.order("created_at DESC") %>
+            </div>  
+
+            
+</div>
+
+

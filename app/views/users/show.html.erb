@@ -26,11 +26,16 @@
                       </ul>
                       <div class="tab-content">
                           <div id="followers-posts" class="tab-pane fade in active">
-                              <% if @feed_items.any? %>
+                              
+                                <% @combined.each do |item| %>
+                                  <% if item.class == Post %>
+                                    <%= render partial: 'feed_item', locals: { feed_item: item } %>
+                                  <% else %>
+                                    <%= render partial: 'feed_product', locals: { feed_product: item } %>
+                                  <% end %>
+                                <% end %>
                                 
-                                  <%= render partial: 'feed_item', collection: @feed_items %>
-                                
-                              <% end %>
+                              
                           </div>
                           <div id="my-posts" class="tab-pane fade">
                               <div id="post">

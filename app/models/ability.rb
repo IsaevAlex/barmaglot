@@ -7,5 +7,10 @@ class Ability
     can :destroy , PostComment do |comment|
          comment.try(:user_id) == user.id
     end
+
+    can :destroy , Comment do |comment|
+         comment.try(:user_id) == user.id
+    end
+
   end
 end

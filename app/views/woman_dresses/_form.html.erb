@@ -1,0 +1,48 @@
+<%= nested_form_for [@woman_dress] do |form| %> 
+	<div class="form-group">
+		<%= form.text_field :name, placeholder:"Название", class:"form-control" %>	
+	</div>
+	<div class="form-group">
+		<%= form.collection_select :woman_category_id, WomanCategory.order(:name), :id, :name, {prompt: "Выберите категорию продукта"} , {class: "form-control"}  %>    <br/>  	
+	</div>
+	<div class="form-group">
+			<%= form.fields_for :images do |image| %>  
+	    	 	<%= image.file_field(:avatar) %>
+      		 	<%= image_tag image.object.avatar.url(:thumb) if image.object.avatar? %>
+      		 	<%= image.link_to_remove "Удалить" %>
+	  		<% end %>
+			<p>
+				<%= form.link_to_add :images do %>
+					<i class="fa fa-camera fa-2x" aria-hidden="true"></i>
+				<% end %>
+			</p>
+	</div>
+	<div class="form-group">
+		<%= form.text_field :price, placeholder: "Цена", class:"form-control" %>	
+	</div>
+
+	<div class="form-group">
+		<%= form.fields_for :clother_size_elements do |clother| %>
+  			<%= clother.collection_select :clother_size_id, ClotherSize.order(:name), :id, :name, {prompt: "Выберите размер одежды"}, {class: "form-control"}  %>
+  			<%= clother.hidden_field :clother_id, value: @woman_dress.id %>
+  			<%= clother.link_to_remove "Remove this clother type" %>
+		<% end %>
+		<p><%= form.link_to_add "Добавить еще размер", :clother_size_elements %></p>  <br/>  	
+	</div>
+
+	<div class="form-group">
+		<%= form.text_area :description, placeholder: "Описание товара", size: "20x10", class:"form-control" %>	
+	</div>
+
+	<div class="form-group">
+		<%= form.check_box :garant, placeholder: "Гарантия", class:"form-control" %>	
+	</div>
+
+	<div class="form-group">
+		<%= form.check_box :on_sale, placeholder: "В продаже", class:"form-control" %>	
+	</div><br>
+
+	<div class="form-group">
+		<p><%= form.submit "Создать", class:"btn pull-right" %></p><br/>		
+	</div>
+<% end %> <br/>

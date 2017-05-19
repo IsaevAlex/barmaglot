@@ -1,10 +1,20 @@
 class User < ApplicationRecord
+  
+  has_many :products, :dependent => :destroy, :foreign_key => "user_id", :class_name => "Product"
+  has_many :woman_dresses, :source => :item, :through => :products, :source_type => "WomanDress", :class_name => "WomanDress"
+  has_many :man_dresses, :source => :item, :through => :products, :source_type => "ManDress", :class_name => "ManDress"
+  
+
   has_many :posts
+   
+  has_many :likes
+  
 
   has_many :post_voices  
   has_many :voices, through: :post_voices, source: :post
 
   has_many :post_comments
+  has_many :comments
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -87,6 +97,12 @@ class User < ApplicationRecord
   def feed
     Post.from_users_followed_by(self)
   end
+
+  def product_feed
+    Product.from_users_followed_by(self)
+  end
+
+
 
 
 end

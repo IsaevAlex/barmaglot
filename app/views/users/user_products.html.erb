@@ -1,0 +1,94 @@
+<%= render 'layouts/header' %>
+<div class="user_products">
+    <div class="col-md-12">
+        <h1 class="text-center">Товары пользователя</h1>
+    </div>
+</div>
+<div class="row">
+    <nav class="navbar">
+        <div class="container">
+            <div class="collapse navbar-collapse nav-user-products" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                    <li>
+                        <%= link_to "Поиск", '#' %>
+                    </li>
+                    <li>
+                        <%= link_to "Все",  user_products_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Мужская одежда",  man_dress_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Женская одежда",  woman_dress_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Детские товары",  user_products_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Авто и мото",  man_dress_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Для дома и сада",  woman_dress_user_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Часы",  man_dress_user_path %>
+                    </li>
+                    <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Еще</a>
+                          <ul class="dropdown-menu">
+                            <li> 
+                                <%= link_to "Добавить новость", new_post_path, remote: true,  data: { toggle: "modal", target: "#newPostModal" } %>
+                            </li>
+                            <li>
+                                <%= link_to "Добавить товар", add_product_path %>
+                            </li>
+                            <li>
+                                <%= link_to "Добавить услугу", '#' %>
+                            </li>
+                          </ul>
+                    </li>
+              </ul>
+            </div>
+        </div>
+    </nav><br><br>
+</div>
+<div class="container">
+    <div class="row-products">
+        <% @items.each do | item | %>
+            <%= link_to item.item, remote: true,  data: { toggle: "modal", target: "#showProductModal" } do %>
+            <div class="panel panel-white post panel-shadow">
+                <% item.item.images.take(1).each do | image | %>
+                        <%= image_tag image.avatar.url, class:"img-responsive" %>
+                    <% end %>
+               <div class="panel-heading">
+                    <div class="pull-left">
+                        <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), item.user  %>
+                    </div>
+                    <a href="#"><b><%= item.user.email %></b></a>
+                    <p><%= item.created_at %></p>
+                    
+                    
+               </div>
+               <%= link_to item.item, remote: true,  data: { toggle: "modal", target: "#showProductModal" } do %>
+                    <div class="panel-body">
+                        <h4><%= item.item.name %></h4>
+                        <p><%= item.item.description %></p>
+                    </div>
+                <% end %>
+            </div>
+            <% end %>
+        <% end %> 
+
+    
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="showProductModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

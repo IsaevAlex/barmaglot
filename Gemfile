@@ -13,6 +13,7 @@ gem 'paperclip'
 gem "cancan"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
+gem 'ransack'
 gem 'devise'
 gem "nested_form"
 gem 'omniauth'

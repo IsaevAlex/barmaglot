@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :following, :followers, :feed]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :following, :followers, :feed, :user_products, :man_dress, :woman_dress, :p]
 
   # GET /users/:id.:format
   def show
@@ -7,14 +7,41 @@ class UsersController < ApplicationController
     @users = User.all
     @recomended_followers = @users.sample(5)
     @feed_items = current_user.feed.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
+    @feed_products = current_user.product_feed.order("created_at DESC")
     @follwedusers = @user.followed_users
+    @combined = (@feed_items + @feed_products).sort_by(&:created_at).reverse
   end
 
+  def cap(item_type)
+      case item_type
+      when "ManDress"
+        "Мужская одежда"
+      when "WomanDress"
+        "Женская одежда"  
+      else
+        "Нет категории" 
+      end
+  end
 
   # GET /users/:id/edit
   def edit
     # authorize! :update, @user
   end
+  
+  def user_products
+    @items = @user.products.order("created_at DESC") 
+  end
+
+  def man_dress
+    @items = @user.products.man_dress.order("created_at DESC") 
+    render 'user_products'
+  end
+
+  def woman_dress
+    @items = @user.products.woman_dress.order("created_at DESC") 
+    render 'user_products'
+  end
+
 
   def following
     @title = "Подписки"

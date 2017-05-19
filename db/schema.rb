@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424171321) do
+ActiveRecord::Schema.define(version: 20170518173834) do
+
+  create_table "clother_size_elements", force: :cascade do |t|
+    t.integer  "clother_id"
+    t.string   "clother_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "product_id"
+    t.integer  "clother_size_id"
+  end
+
+  create_table "clother_sizes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.text     "text"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +43,45 @@ ActiveRecord::Schema.define(version: 20170424171321) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "image_id"
+    t.string   "image_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "like_id"
+    t.string   "like_type"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["like_id"], name: "index_likes_on_like_id"
+    t.index ["user_id", "like_id"], name: "index_likes_on_user_id_and_like_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "man_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "man_dresses", force: :cascade do |t|
+    t.integer  "man_category_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.decimal  "price"
+    t.boolean  "garant"
+    t.boolean  "on_sale"
+    t.text     "description"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -57,6 +120,14 @@ ActiveRecord::Schema.define(version: 20170424171321) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.integer  "user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -87,6 +158,23 @@ ActiveRecord::Schema.define(version: 20170424171321) do
     t.string   "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "woman_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "woman_dresses", force: :cascade do |t|
+    t.integer  "woman_category_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name"
+    t.decimal  "price"
+    t.boolean  "garant"
+    t.boolean  "on_sale"
+    t.text     "description"
   end
 
 end

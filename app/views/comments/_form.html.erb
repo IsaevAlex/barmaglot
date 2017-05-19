@@ -1,0 +1,7 @@
+<%= form_for([@commentable, @commentable.comments.build], remote: true) do |f| %>
+	<ul class="errors" style="list-style: none;"></ul>
+	<div class="form-group">
+		<%= f.text_area :text, autofocus: true, cols: "40", rows: "5", class:"form-control" %>
+	</div>
+	<%= f.submit "Добавить",  class: "btn pull-right" %>
+<% end %>	

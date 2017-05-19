@@ -1,0 +1,124 @@
+<%= render 'layouts/header' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Добавить товар</h1>
+			<h4>Выберите категорию</h4><br><br>
+			<div class="row">
+					<div class="col-md-4">
+						<%= link_to new_woman_dress_path , remote: true,  data: { toggle: "modal", target: "#newProductModal" } do %>
+							<i class="fa fa-female fa-5x"></i>
+							<h3>Одежда для женщин</h3>	
+						<% end %>
+					</div>
+				
+					<div class="col-md-4">
+						<%= link_to new_man_dress_path , remote: true,  data: { toggle: "modal", target: "#newProductModal" } do %>
+							<i class="fa fa-male fa-5x"></i>	
+							<h3>Одежда для мужчин</h3>	
+						<% end %>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-child fa-5x"></i>	
+						<h3>Детские товары</h3>	
+					</div> 
+				</div><br><br>
+
+				<div class="row">
+					<div class="col-md-4">
+						<i class="fa fa-mobile fa-5x"></i>	
+						<h3>Телефоны и телекоммуникации</h3>
+					</div>
+				
+					<div class="col-md-4">
+						<i class="fa fa-car fa-5x"></i>	
+						<h3>Авто и мото</h3>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-bath fa-5x"></i>
+						<h3>Для дома и сада</h3>	
+					</div> 
+				</div><br><br>
+
+				<div class="row">
+					<div class="col-md-4">
+						<i class="fa fa-microchip fa-5x"></i>
+						<h3>Компьютеры и сетевое оборудование</h3>	
+					</div>
+				
+					<div class="col-md-4">
+						<i class="fa fa-diamond fa-5x"></i>	
+						<h3>Ювелирные изделия</h3>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-clock-o fa-5x"></i>	
+						<h3>Часы</h3>
+					</div> 
+				</div><br><br>
+
+				<div class="row">
+					<div class="col-md-4">
+						<i class="fa fa-futbol-o fa-5x"></i>
+						<h3>Спорт и развлечение</h3>	
+					</div>
+				
+					<div class="col-md-4">
+						<i class="fa fa-television fa-5x"></i>	
+						<h3>Бытовая электроника</h3>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-paw fa-5x"></i>	
+						<h3>Обувь</h3>
+					</div> 
+				</div><br><br>
+
+				<div class="row">
+					<div class="col-md-4">
+						<i class="fa fa-cubes fa-5x"></i>
+						<h3>Игрушки и хобби</h3>	
+					</div>
+				
+					<div class="col-md-4">
+						<i class="fa fa-flash fa-5x"></i>	
+						<h3>Лампы и освещение</h3>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-heartbeat fa-5x"></i>	
+						<h3>Красота и здоровье</h3>
+					</div> 
+				</div><br><br>
+
+				<div class="row">
+					<div class="col-md-4">
+						<i class="fa fa-flask fa-5x"></i>
+						<h3>Промышленность и бизнес</h3>	
+					</div>
+				
+					<div class="col-md-4">
+						<span class="mega icon-present"></span>	
+						&nbsp;
+						<h3>Свадьбы и торжества</h3>
+					</div>
+
+					<div class="col-md-4">
+						<i class="fa fa-bed fa-5x"></i>	
+						<h3>Мебель</h3>
+					</div> 
+				</div><br><br>
+				
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="newProductModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
