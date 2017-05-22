@@ -157,6 +157,19 @@
 	padding: 5px 25px;
 }
 
+.btn-success{
+  background-color: #5cb85c;
+  color: #fff;
+  border-radius: 40px;
+  padding: 15px 25px;
+  font-size: 20px;
+}
+
+.btn-success:hover{
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .btn:hover{
 	background-color: $main-color;
 	color: #fff;
@@ -169,4 +182,16 @@
 .panel-body{
   color: #333;
 }
+
+.sign-back{
+   background: #ffffff; 
+   padding: 30px;
+   text-align: center;
+   margin-top: 5%;
+   margin-left: 50%;
+   margin-right: 50%;
+   width: 100%;
+}
+
+
 

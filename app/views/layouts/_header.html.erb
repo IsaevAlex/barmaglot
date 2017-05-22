@@ -32,30 +32,36 @@
           <input type="text" class="form-control"  aria-hidden="true" placeholder="Поиск на Tonleve">
         </div>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
-          <ul class="dropdown-menu">
-            <li> 
-                <%= link_to "Добавить новость", new_post_path, remote: true,  data: { toggle: "modal", target: "#newPostModal" } %>
-            </li>
-            <li>
-                <%= link_to "Добавить товар", add_product_path %>
-            </li>
-            <li>
-                <%= link_to "Добавить услугу", '#' %>
-            </li>
-          </ul>
-        </li>
-        <li><a href=""><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a></li>
-        
-        <li>
-          <%= link_to current_user do %>
-            <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-           <% end %>
-        </li>
-        
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
+              <li> 
+                  <%= link_to "Добавить новость", new_post_path, remote: true,  data: { toggle: "modal", target: "#newPostModal" } %>
+              </li>
+              <li>
+                  <%= link_to "Добавить товар", add_product_path %>
+              </li>
+              <li>
+                  <%= link_to "Добавить услугу", '#' %>
+              </li>
+            </ul>
+          </li>
+          <li><a href=""><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a></li>
+          
+          <li>
+            <%= link_to current_user do %>
+              <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+             <% end %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+           <li><%= link_to 'Войти', new_user_session_path %></li>
+           <li><%= link_to 'Зарегистрироваться', new_user_registration_path %></li>
+        </ul>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

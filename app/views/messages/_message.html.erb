@@ -1,0 +1,48 @@
+<% if message.body %>
+    <% if message.user == current_user %>
+      <div class="pull-right">
+          <div class="panel panel-white post panel-shadow">
+              <div class="post-heading">
+                   <div class="pull-left image">
+                      <% if message.user.remote_avatar? %>
+                        <%= link_to message.user do %>
+                            <%= image_tag message.user.remote_avatar, class:"img-rounded avatar", :size => '60x60' %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), message.user, :size => '60x60'  %>
+                    <% end %>
+                   </div>
+                   <div class="pull-left meta">
+                    <b><%= link_to message.user.name, message.user %></b>
+                                      добавила отзыв
+                      <h6 class="text-muted time"><%= message.created_at %></h6>
+                   </div>
+                  
+              </div> 
+              <div class="post-description comment">
+                  <h4><%= message.body %></h4>
+              </div>
+          </div>
+      </div>
+    <% else %>  
+      <div class="pull-left">
+           <div class="panel panel-white post panel-shadow">
+              <div class="post-heading">
+                   <div class="pull-left image">
+                    <%= link_to image_tag("avatar.png", class:"img-rounded avatar", :size => '60x60'), message.user %>
+                   </div>
+                   <div class="pull-left meta">
+                    <b><%= link_to message.user.name, message.user %></b>
+                                      добавила отзыв
+                      <h6 class="text-muted time"><%= message.created_at %></h6>
+                   </div>
+                  
+              </div> 
+              <div class="post-description comment">
+                  <h4><%= message.body %></h4>
+              </div>
+          </div>
+      </div>
+    <% end %>
+      
+<% end %>

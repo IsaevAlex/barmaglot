@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require jquery_nested_form
 //= require turbolinks
+//= require_tree ./channels
 //= require_tree .
 
 
@@ -23,4 +24,11 @@ $(function () {
     $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
     return false;
   });
+});
+
+$('form').keydown(function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
 });

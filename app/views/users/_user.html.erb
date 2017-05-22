@@ -1,7 +1,13 @@
 <div class="panel panel-white post ">
 	<div class="post-heading">
          <div class="pull-left image">
-         	<%= link_to image_tag("avatar.png", class:"img-rounded avatar"), user %>
+         	 <% if user.remote_avatar? %>
+                <%= link_to user do %>
+                    <%= image_tag user.remote_avatar, class:"img-rounded avatar" %>
+                <% end %>
+            <% else %>
+                <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), user  %>
+            <% end %>
          </div>
          <div class="pull-left meta">
          	<b><%= link_to user.name, user %></b>

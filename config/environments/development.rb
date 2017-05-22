@@ -54,7 +54,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.app_domain = 'barmaglot.com'
-
+  config.action_cable.url = "ws://localhost:3000/cable"
   # Email
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

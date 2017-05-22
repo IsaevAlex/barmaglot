@@ -7,9 +7,15 @@
                 
                <div class="panel-heading">
                     <div class="pull-left">
-                        <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), feed_product.user  %>
+                         <% if feed_product.user.remote_avatar? %>
+                            <%= link_to feed_product.user do %>
+                                <%= image_tag feed_product.user.remote_avatar, class:"img-rounded avatar", :size => '60x60' %>
+                            <% end %>
+                        <% else %>
+                            <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), feed_product.user, :size => '60x60'  %>
+                        <% end %>
                     </div>
-                    <a href="#"><b><%= feed_product.user.email %></b></a>
+                    <a href="#"><b><%= feed_product.user.name %></b></a>
                     <p><%= feed_product.item.created_at %></p>
                     
                     

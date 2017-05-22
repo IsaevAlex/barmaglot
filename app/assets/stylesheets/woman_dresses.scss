@@ -1,3 +1,8 @@
 // Place all the styles related to the WomanDresses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.woman_dresses_img{
+	background: url("/assets/woman_dresses.jpg") no-repeat;
+	background-size: cover;
+}

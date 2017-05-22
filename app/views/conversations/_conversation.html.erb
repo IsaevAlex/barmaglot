@@ -1,0 +1,23 @@
+<% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+	<% if conversation.sender_id == current_user.id %>
+    	<% recipient = User.find(conversation.recipient_id) %>
+    <% else %>
+        <% recipient = User.find(conversation.sender_id) %>
+    <% end %>
+    <div class="panel panel-white post ">
+		<div class="post-heading">
+         	<div class="pull-left image">
+         		<%= link_to image_tag("avatar.png", class:"img-rounded avatar",  :size => '60x60'), recipient %>
+         	</div>
+	        <div class="pull-left meta">
+	         	<b><%= link_to recipient.name, recipient %></b>
+	            <h6 class="text-muted time"><%= recipient.email %></h6>
+	        </div>
+	        <div class="pull-right">
+	    		<%= link_to "Перейти  к диалогу", conversation_messages_path(conversation), class: "btn" %>        
+	        </div>
+    	</div> 
+	</div>
+z
+    
+<% end %>

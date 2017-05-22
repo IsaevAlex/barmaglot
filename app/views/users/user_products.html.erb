@@ -1,5 +1,5 @@
 <%= render 'layouts/header' %>
-<div class="user_products">
+<div class="user_products user_products_img">
     <div class="col-md-12">
         <h1 class="text-center">Товары пользователя</h1>
     </div>
@@ -64,7 +64,7 @@
                     <div class="pull-left">
                         <%= link_to image_tag("avatar.png", class:"img-rounded avatar"), item.user  %>
                     </div>
-                    <a href="#"><b><%= item.user.email %></b></a>
+                    <a href="#"><b><%= item.user.name %></b></a>
                     <p><%= item.created_at %></p>
                     
                     

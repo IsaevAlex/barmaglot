@@ -1,0 +1,37 @@
+<%= render 'layouts/header' %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="row">
+      <div class="col-md-6">
+          <div class="sign-back">
+              <h2>Вход</h2><br>
+              <div class="form-group">
+                  <%= f.email_field :email, :placeholder => "Эл.адрес", autofocus: true, class:"form-control" %>
+              </div> <br>
+              <div class="form-group">
+                  <%= f.password_field :password, autocomplete: "off", :placeholder => "Пароль", autofocus: true, class:"form-control" %>
+              </div> <br>
+              <% if devise_mapping.rememberable? -%>
+                  <div class="form-group">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label "Запомнить меня" %>
+                  </div>
+              <% end %> 
+              <div class="form-group">
+                  <%= link_to  user_facebook_omniauth_authorize_path do %>
+                      <i class="fa fa-facebook-official fa-3x" aria-hidden="true"></i>
+                  <% end %>
+                  <%= link_to  user_twitter_omniauth_authorize_path do %>  
+                      <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
+                  <% end %>
+                   <%= link_to  user_vkontakte_omniauth_authorize_path do %>  
+                      <i class="fa fa-vk fa-3x" aria-hidden="true"></i>
+                  <% end %>
+              </div>
+              <div class="form-group">
+                  <%= f.submit "Войти в систему", class: "btn btn-primary btn-sign-up" %>
+              </div>
+          </div>
+      </div>
+  </div>
+<% end %>
+

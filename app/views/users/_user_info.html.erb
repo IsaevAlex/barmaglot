@@ -1,8 +1,9 @@
 <div class="user-info">
 	<div class="user-info-avatar">
-		<%= image_tag("avatar.png", :class => "img-rounded", width:"130px") %>
+		<% if @user.remote_avatar? %>
+			<%= image_tag @user.remote_avatar, :class => "img-rounded", width:"130px" %>
+		<% end %>
 		<h4><%= @user.name %></h4>
-		<h3><%= @user.email %></h3>
 		<h4>Казань</h4><br>
 		<%= render 'follow_form' %><br>
 	</div>

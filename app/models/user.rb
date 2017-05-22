@@ -6,9 +6,13 @@ class User < ApplicationRecord
   
 
   has_many :posts
-   
+  has_one :image, :as => :image, dependent: :destroy 
   has_many :likes
+  has_many :conversations, :foreign_key => :sender_id
+  has_many :users
   
+  has_many :sender_conversations, foreign_key: 'sender_id', class_name: 'Conversation'
+  has_many :recipient_conversations, foreign_key: 'recipient_id', class_name: 'Conversation'
 
   has_many :post_voices  
   has_many :voices, through: :post_voices, source: :post
@@ -23,7 +27,11 @@ class User < ApplicationRecord
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  
+
+  has_one :location
+  has_many :phones
+  accepts_nested_attributes_for :phones
+  validates_associated :phones
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -59,11 +67,13 @@ class User < ApplicationRecord
       # Создать пользователя, если это новая запись
       if user.nil?
         user = User.new(
-          name: auth.extra.raw_info.name,
+          name: auth.info.name,
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-          password: Devise.friendly_token[0,20]
+          password: Devise.friendly_token[0,20],
+          remote_avatar: auth.info.image
         )
+
         user.skip_confirmation!
         user.save!
       end

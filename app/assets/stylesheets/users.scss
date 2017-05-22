@@ -61,8 +61,6 @@
 }
 
 .user_products{
-	background: url("/assets/user_products.jpg") no-repeat;
-	background-size: cover;
 	padding-top: 200px;
 	padding-bottom: 200px;
 
@@ -71,6 +69,18 @@
 		color: #fff;
 	}
 }
+
+.user_products_img{
+	background: url("/assets/user_products.jpg") no-repeat;
+	background-size: cover;
+}
+
+.user_conversations_img{
+	background: url("/assets/message.jpg") no-repeat;	
+	background-size: cover;
+}
+
+
 
 .text-center{
 	text-align: center;

@@ -6,4 +6,6 @@
 	    <%= render 'follow' %>
 	  <% end %>
   </div>
+<% else %>
+	<%= link_to "Редактировать", edit_user_path, class:"btn" %>
 <% end %>

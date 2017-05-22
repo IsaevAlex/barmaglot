@@ -14,6 +14,7 @@ gem "cancan"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'ransack'
+gem 'redis'
 gem 'devise'
 gem "nested_form"
 gem 'omniauth'

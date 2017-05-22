@@ -2,7 +2,13 @@
   			    <div class="post-heading">
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                  <div class="pull-left image">
-                     <%= link_to image_tag("avatar.png", class:"img-rounded avatar", :size => '60x60'), @man_dress.product.user  %>
+                     <% if @man_dress.product.user.remote_avatar? %>
+                        <%= link_to @man_dress.product.user do %>
+                            <%= image_tag @man_dress.product.user.remote_avatar, :size => '60x60', class:"img-rounded avatar" %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to image_tag("avatar.png", class:"img-rounded avatar", :size => '60x60' ), @man_dress.product.user  %>
+                    <% end %>
                  </div>
                  <div class="pull-left meta">
                         <a href="#"><b> <%= @man_dress.product.user.name %></b></a>
@@ -10,7 +16,9 @@
                         <h6 class="text-muted time">Новость добавлена <%= @man_dress.created_at %></h6>
                   </div><br>
                   <div class="pull-right meta">
-                   		<%= link_to "Подписаться", '#', class:"btn" %>
+                      
+                   		   <%= link_to "Написать", conversations_path(sender_id: current_user.id, recipient_id: @man_dress.product.user.id), method: 'post' , class:"btn" %>
+                      
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <li class="dropdown btn">
                           <i class="fa fa-caret-down" aria-hidden="true"></i>

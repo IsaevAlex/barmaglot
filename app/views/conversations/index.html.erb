@@ -1,0 +1,34 @@
+<%= render 'layouts/header' %>
+<div class="user_products user_conversations_img">
+    <div class="col-md-12">
+        <h1 class="text-center">Ваши сообщения</h1>
+    </div>
+</div><br>
+<div class="container">
+  <div class="row">
+      <div class="col-md-8">
+          <div class="panel panel-white post">
+            <div class="follow-title">
+              <h5><%= @title %></h5>
+              <h5 ><%= @count %></h5>  
+            </div>
+            
+          </div> 
+          <%= render @conversations %>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="indexMessageModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+  
+
+  
+
+
+
+

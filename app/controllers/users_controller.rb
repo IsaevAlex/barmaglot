@@ -6,8 +6,8 @@ class UsersController < ApplicationController
     @posts = @user.posts.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
     @users = User.all
     @recomended_followers = @users.sample(5)
-    @feed_items = current_user.feed.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
-    @feed_products = current_user.product_feed.order("created_at DESC")
+    @feed_items = @user.feed.where(["name LIKE ?","%#{params[:search]}%"]).order("created_at DESC")
+    @feed_products = @user.product_feed.order("created_at DESC")
     @follwedusers = @user.followed_users
     @combined = (@feed_items + @feed_products).sort_by(&:created_at).reverse
   end
@@ -60,7 +60,8 @@ class UsersController < ApplicationController
   def update
     # authorize! :update, @user
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(edit_user_params)
+        byebug
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
         format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
         format.json { head :no_content }
@@ -88,6 +89,7 @@ class UsersController < ApplicationController
   end
   
   private
+    
     def set_user
       @user = User.find(params[:id])
     end
@@ -96,5 +98,9 @@ class UsersController < ApplicationController
       accessible = [ :name, :email ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible).except(:search)
+    end
+
+    def edit_user_params
+      params.require(:user).permit(phones_attributes: [:id, :name, :_destroy], locations_attributes: [:id, :name, :_destroy])
     end
 end

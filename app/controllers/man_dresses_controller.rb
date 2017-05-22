@@ -18,7 +18,6 @@ class ManDressesController < ApplicationController
 		@man_dress = ManDress.create(man_params) 
 		Product.create(item_id: @man_dress.id, item_type:"ManDress", user_id: current_user.id)
 		if @man_dress.save    
-			byebug
 			redirect_to current_user
 		else    
 			render :new
